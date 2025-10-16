@@ -75,12 +75,12 @@ public class Transaction {
 
     // *** Methods ***
     public void getTransactionData() {
-        System.out.printf("%s|%s|%s|%s|%.2f%n",
-                this.transactionDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                this.transactionTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")),
-                this.description,
-                this.vendor,
-                this.amount
+        System.out.printf("%-12s | %-8s | %-40s | %-25s | %10.2f%n",
+                transactionDate,
+                transactionTime,
+                description,
+                vendor,
+                amount
         );
     }
 }
