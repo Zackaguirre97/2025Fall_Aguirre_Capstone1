@@ -38,7 +38,7 @@ public class Account {
     // Method to add a new transaction to the list of all transactions.
     public void addTransaction(Transaction newTransaction) {
         // Add the transaction to the list.
-        transactions.add(newTransaction);
+        transactions.add(0, newTransaction);
     }
 
     // Method to calculate the balance.
