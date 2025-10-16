@@ -30,8 +30,6 @@ public class FileManager {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             // Method variable
             String line;
-            // Skip the first line of the file
-            reader.readLine();
             // While there is a line to read in the file.
             while ((line = reader.readLine()) != null) {
                 // Create a string array to hold the different part of the file. Separate the lines by "|".
@@ -61,7 +59,7 @@ public class FileManager {
             System.out.println("Error: IO Exception");
         }
         catch (Exception e) {
-            System.out.println("Error: Uh oh... How did we even get here?");
+            System.out.println("Error: File reader error");
         }
     }
 
@@ -70,7 +68,7 @@ public class FileManager {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Transaction t : updatedList) {
                 writer.write(String.format(
-                        "%s | %s | %s | %s | %.2f\n",
+                        "%s|%s|%s|%s|%.2f\n",
                         t.getTransactionDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                         t.getTransactionTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
                         t.getDescription(),
@@ -85,7 +83,7 @@ public class FileManager {
             System.out.println("Error: IOException");
         }
         catch(Exception e) {
-            System.out.println("Error: Uh oh... How did we even get here?");
+            System.out.println("Error: File Writer error");
         }
     }
 }
