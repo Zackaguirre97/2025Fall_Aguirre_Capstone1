@@ -10,7 +10,7 @@ import java.util.List;
 // Handles reading from & writing to files.
 public class FileManager {
     // *** Props ***
-    private static final String FILE_PATH = "src/main/resources/transactions.csv"; // Links to the file containing past transactions data.
+    private static final String FILE_PATH = "src/main/resources/transactions.csv"; // Links to the file containing past transaction's data.
     private List<Transaction> transactionsFromFile = new ArrayList<>(); // List of Transaction objects
 
     // *** Const ***
