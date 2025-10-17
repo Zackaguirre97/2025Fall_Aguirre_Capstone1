@@ -71,25 +71,29 @@ Example:
 ## Screenshots
 
 1. Main Menu display
-[Screenshot Link here]
+![Screenshot_01.png](src/main/resources/Screenshot_01.png)
 2. Adding a deposit
-[Screenshot Link here]
+![Screenshot_02.png](src/main/resources/Screenshot_02.png)
 3. Adding a payment
-[Screenshot Link here]
-4. Ledger showing all transactions
-[Screenshot Link here]
-5. Ledger filtered by deposits
-[Screenshot Link here]
-6. Ledger filtered by payments
-[Screenshot Link here]
-7. Ledger filtered by vendor
-[Screenshot Link here]
-8. Ledger showing current balance
-[Screenshot Link here]
-9. Reports menu
-[Screenshot Link here]
-10. Reports filtered by month/year
-[Screenshot Link here]
+![Screenshot_03.png](src/main/resources/Screenshot_03.png)
+4. Ledger Menu display
+![Screenshot_04.png](src/main/resources/Screenshot_04.png)
+5. Ledger showing all transactions
+![Screenshot_05.png](src/main/resources/Screenshot_05.png)
+6. Ledger filtered by deposits
+![Screenshot_06.png](src/main/resources/Screenshot_06.png)
+7. Ledger filtered by payments
+![Screenshot_07.png](src/main/resources/Screenshot_07.png)
+8. Reports menu
+![Screenshot_08.png](src/main/resources/Screenshot_08.png)
+9. Ledger filtered by vendor
+![Screenshot_09.png](src/main/resources/Screenshot_09.png)
+10. Reports filtered by previous year
+![Screenshot_10.png](src/main/resources/Screenshot_10.png)
+11. Custom Reports filtered by month
+![Screenshot_11.png](src/main/resources/Screenshot_11.png)
+12. Exit/Back Process
+![Screenshot_12.png](src/main/resources/Screenshot_12.png)
 
 ## How to Run
 
