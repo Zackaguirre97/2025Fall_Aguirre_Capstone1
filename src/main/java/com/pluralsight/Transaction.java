@@ -75,9 +75,11 @@ public class Transaction {
 
     // *** Methods ***
     public void getTransactionData() {
-        System.out.printf("%-12s | %-8s | %-40s | %-25s | %10.2f%n",
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formattedTime = transactionTime.format(timeFormatter);
+        System.out.printf("%-10s | %-8s | %-40s | %-25s | %10.2f%n",
                 transactionDate,
-                transactionTime,
+                formattedTime,
                 description,
                 vendor,
                 amount
