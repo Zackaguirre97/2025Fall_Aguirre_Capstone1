@@ -70,6 +70,7 @@ Example:
 
 ## Screenshots
 
+```
 1. Main Menu display
 ![Screenshot_01.png](src/main/resources/Screenshot_01.png)
 2. Adding a deposit
@@ -95,6 +96,7 @@ Example:
 12. Exit/Back Process
 ![Screenshot_12.png](src/main/resources/Screenshot_12.png)
 
+```
 ## How to Run
 
 1. Clone the repository.
