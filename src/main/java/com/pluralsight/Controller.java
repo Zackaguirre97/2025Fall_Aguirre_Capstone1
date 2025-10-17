@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
+import static com.pluralsight.Account.printCenteredTitle;
+
 public class Controller {
     // *** Props ***
     private Scanner sc;
     private Account account;
     private FileManager fileManager;
+    private static int TOTAL_WIDTH = 105;
 
     // *** Const ***
     public Controller() {
@@ -21,15 +24,21 @@ public class Controller {
     // *** Methods ***
     // Print statements for the main menu/starting loop
     public void showMainMenu() {
-        // Display the main menu
-        System.out.println("\n*** Main Menu ***");
+        // Display the main menu.
+        System.out.println(); // Add a blank line before the menu
+        System.out.println("*".repeat(TOTAL_WIDTH));
+        printCenteredTitle("Main Menu", TOTAL_WIDTH, " ");
+        System.out.println("*".repeat(TOTAL_WIDTH));
+
         System.out.println("D. Add Deposit");
         System.out.println("P. Make Payment");
-        System.out.println("L. Ledger");
+        System.out.println("L. View Ledger");
         System.out.println("X. Exit");
-        // Prompt the user to enter a choice from the menu.
+
+        System.out.println("-".repeat(TOTAL_WIDTH));
         System.out.print("Select an option: ");
     }
+
 
     // Starting menu/page. Shows the main menu
     public void start() {
@@ -68,10 +77,12 @@ public class Controller {
     public void addDeposit() {
         boolean runAgain = true;
         while (runAgain) {
-            System.out.println("\n=== Make Deposit ===");
+            System.out.println("=".repeat(TOTAL_WIDTH));
+            printCenteredTitle("Make Deposit", TOTAL_WIDTH, " ");
+            System.out.println("=".repeat(TOTAL_WIDTH));
             System.out.print("Enter the deposit amount: ");
             String depositAmountInput = sc.nextLine().trim();
-            // Once verifying that the depositAmount is a double- continue.
+            // Once verifying that the depositAmount is a double, continue.
             if (isDouble(depositAmountInput)) {
                 double depositAmount = Double.parseDouble(depositAmountInput);
                 String[] randomDepositInfo = getRandomDepositInfo();
@@ -93,7 +104,9 @@ public class Controller {
     public void makePayment() {
         boolean runAgain = true;
         while (runAgain) {
-            System.out.println("\n=== Make Payment ===");
+            System.out.println("=".repeat(TOTAL_WIDTH));
+            printCenteredTitle("Make Payment", TOTAL_WIDTH, " ");
+            System.out.println("=".repeat(TOTAL_WIDTH));
             System.out.print("Enter the payment amount: ");
             String paymentAmountInput = sc.nextLine().trim();
             // Verify that the amount entered is a valid double
@@ -117,7 +130,9 @@ public class Controller {
 
     // Handles the display of the ledger menu
     public void displayLedgerMenu() {
-        System.out.println("\n=== Ledger Menu ===");
+        System.out.println("=".repeat(TOTAL_WIDTH));
+        printCenteredTitle("Ledger Menu", TOTAL_WIDTH, " ");
+        System.out.println("=".repeat(TOTAL_WIDTH));
         System.out.println("A. All Transactions");
         System.out.println("D. Deposits Only");
         System.out.println("P. Payments Only");
@@ -137,7 +152,7 @@ public class Controller {
                 case "A":
                 case "D":
                 case "P":
-                    if (account.getReport(ledgerMenuChoice)) {
+                    if (account.getReport(ledgerMenuChoice, TOTAL_WIDTH)) {
                         break;
                     }
                     else {
@@ -164,12 +179,15 @@ public class Controller {
 
     // Handles the display of the reports menu
     public void showReportsMenu() {
-        System.out.println("\n=== Reports Menu ===");
+        System.out.println("=".repeat(TOTAL_WIDTH));
+        printCenteredTitle("Reports Menu", TOTAL_WIDTH, " ");
+        System.out.println("=".repeat(TOTAL_WIDTH));
         System.out.println("1. Month To Date");
         System.out.println("2. Previous Month");
         System.out.println("3. Year To Date");
         System.out.println("4. Previous Year");
         System.out.println("5. Search by Vendor");
+        System.out.println("6. Custom Report");
         System.out.println("0. Back");
         // Prompt the user to enter a choice from the above menu.
         System.out.print("Select an option: ");
@@ -190,12 +208,25 @@ public class Controller {
                     case "2":
                     case "3":
                     case "4":
-                        account.getReport(reportsMenuChoice);
+                        account.getReport(reportsMenuChoice, TOTAL_WIDTH);
                         break;
                     case "5":
                         System.out.print("Please enter a vendor name:");
                         String vendor = sc.nextLine().trim();
-                        account.getReport(vendor);
+                        account.getReport(vendor, TOTAL_WIDTH);
+                        break;
+                    case "6":
+                        System.out.print("Enter start date (yyyy-MM-dd) or leave blank: ");
+                        String startDateInput = sc.nextLine().trim();
+                        System.out.print("Enter end date (yyyy-MM-dd) or leave blank: ");
+                        String endDateInput = sc.nextLine().trim();
+                        System.out.print("Enter description or leave blank: ");
+                        String descriptionInput = sc.nextLine().trim();
+                        System.out.print("Enter vendor or leave blank: ");
+                        String vendorInput = sc.nextLine().trim();
+                        System.out.print("Enter amount or leave blank: ");
+                        String amountInput = sc.nextLine().trim();
+                        account.getCustomReport(startDateInput, endDateInput, descriptionInput, vendorInput, amountInput, TOTAL_WIDTH);
                         break;
                     default:
                         System.out.println("Please enter a number from the menu.");
