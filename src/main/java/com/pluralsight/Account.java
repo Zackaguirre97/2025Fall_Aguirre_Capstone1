@@ -48,8 +48,42 @@ public class Account {
         }
     }
 
+    public void getCustomReport(String startDateStr, String endDateStr, String description,
+                                String vendor, String amountStr, int totalWidth) {
+        LocalDate startDate = startDateStr.isEmpty() ? null : LocalDate.parse(startDateStr);
+        LocalDate endDate = endDateStr.isEmpty() ? null : LocalDate.parse(endDateStr);
+        Double amount = amountStr.isEmpty() ? null : Double.parseDouble(amountStr);
+
+        int count = 0;
+        printCenteredTitle("🔎 Custom Search", totalWidth, "-");
+        System.out.printf("%-12s %-10s %-42s %-25s %12s%n",
+                "DATE", "TIME", "DESCRIPTION", "VENDOR", "AMOUNT");
+        System.out.println("-".repeat(totalWidth));
+
+        for (Transaction t : transactions) {
+            boolean matches = true;
+            if (startDate != null && t.getTransactionDate().isBefore(startDate)) matches = false;
+            if (endDate != null && t.getTransactionDate().isAfter(endDate)) matches = false;
+            if (!description.isEmpty() && !t.getDescription().toLowerCase().contains(description.toLowerCase())) matches = false;
+            if (!vendor.isEmpty() && !t.getVendor().toLowerCase().contains(vendor.toLowerCase())) matches = false;
+            if (amount != null && t.getAmount() != amount) matches = false;
+
+            if (matches) {
+                t.getTransactionData();
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            System.out.println("No transactions match the custom search criteria.");
+        }
+
+        printCenteredBalance(this.balance, totalWidth);
+
+    }
+
     // Method to get a report on the transactions.
-    boolean getReport(String filter) {
+    public boolean getReport(String filter, int totalWidth) {
         int count = 0;
         // Determine title based on filter
         String title;
@@ -80,10 +114,9 @@ public class Account {
         }
 
         // Print title header
-        int totalWidth = 107;
-        printCenteredTitle(title, totalWidth);
+        printCenteredTitle(title, totalWidth, "-");
         // Column headers
-        System.out.printf("%-14s %-10s %-42s %-25s %12s%n",
+        System.out.printf("%-12s %-10s %-42s %-25s %12s%n",
                 "DATE", "TIME", "DESCRIPTION", "VENDOR", "AMOUNT");
         System.out.println("-".repeat(totalWidth));
 
@@ -143,19 +176,32 @@ public class Account {
             return false;
         }
 
-        System.out.println("------------------------------------");
-        System.out.printf("Current Balance: $%.2f%n", this.balance);
-        System.out.println("------------------------------------");
+        printCenteredBalance(this.balance, 105);
 
         return true;
     }
 
     // Method to display a centered title.
-    public static void printCenteredTitle(String title, int totalWidth) {
+    public static void printCenteredTitle(String title, int totalWidth, String filler) {
         int dashCount = (totalWidth - title.length() - 2) / 2;
         if (dashCount < 0) dashCount = 0;
-        String dashes = "-".repeat(dashCount);
-        System.out.println(dashes + " " + title + " " + dashes);
+        String filledSpace = filler.repeat(dashCount);
+        System.out.println(filledSpace + " " + title + " " + filledSpace);
+    }
+
+    // Method to display a centered balance section
+    public void printCenteredBalance(double balance, int totalWidth) {
+        String balanceText = String.format("Current Balance: $%.2f", balance);
+        int padding = (totalWidth - balanceText.length()) / 2;
+        if (padding < 0) padding = 0;
+
+        System.out.println("-".repeat(totalWidth));
+        System.out.printf("%s%s%s%n",
+                " ".repeat(padding),
+                balanceText,
+                " ".repeat(totalWidth - balanceText.length() - padding));
+        System.out.println("-".repeat(totalWidth));
     }
 
 }
+
