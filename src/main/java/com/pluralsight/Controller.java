@@ -1,6 +1,5 @@
 package com.pluralsight;
 
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -45,6 +44,7 @@ public class Controller {
         boolean runAgain = true;
         // Loop until the user chooses to exit
         while(runAgain) {
+            showAppTitle(TOTAL_WIDTH);
             // Calculate the balance.
             account.calculateBalance();
             // Call/Display the main menu
@@ -77,6 +77,7 @@ public class Controller {
     public void addDeposit() {
         boolean runAgain = true;
         while (runAgain) {
+            showAppTitle(TOTAL_WIDTH);
             System.out.println("=".repeat(TOTAL_WIDTH));
             printCenteredTitle("Make Deposit", TOTAL_WIDTH, " ");
             System.out.println("=".repeat(TOTAL_WIDTH));
@@ -104,6 +105,7 @@ public class Controller {
     public void makePayment() {
         boolean runAgain = true;
         while (runAgain) {
+            showAppTitle(TOTAL_WIDTH);
             System.out.println("=".repeat(TOTAL_WIDTH));
             printCenteredTitle("Make Payment", TOTAL_WIDTH, " ");
             System.out.println("=".repeat(TOTAL_WIDTH));
@@ -146,6 +148,7 @@ public class Controller {
     public void handleLedgerMenu() {
         boolean runAgain = true;
         while (runAgain) {
+            showAppTitle(TOTAL_WIDTH);
             displayLedgerMenu();
             String ledgerMenuChoice = sc.nextLine().trim();
             switch(ledgerMenuChoice.toUpperCase()) {
@@ -197,6 +200,7 @@ public class Controller {
     public void handleReportsMenu() {
         boolean runAgain = true;
         while (runAgain) {
+            showAppTitle(TOTAL_WIDTH);
             showReportsMenu();
             String reportsMenuChoice = sc.nextLine().trim();
             if (isInteger(reportsMenuChoice)) {
@@ -237,6 +241,12 @@ public class Controller {
                 System.out.println("Please enter a whole number.");
             }
         }
+    }
+
+    public void showAppTitle(int totalWidth) {
+        System.out.println("\u001B[36m" + "=".repeat(totalWidth));
+        printCenteredTitle("✨\uD83C\uDF0C✨  GALAXY TRANSACTION LEDGER  ✨\uD83D\uDE80✨", totalWidth, " ");
+        System.out.println("=".repeat(totalWidth) + "\u001B[0m");
     }
 
     // Method to generate random descriptions and vendors for the deposit transactions.
